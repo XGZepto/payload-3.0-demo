@@ -9,8 +9,11 @@
 export interface Config {
   collections: {
     users: User;
-    pages: Page;
+    tailors: Tailor;
+    orders: Order;
     media: Media;
+    itemCategories: ItemCategory;
+    serviceOptions: ServiceOption;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
@@ -26,8 +29,14 @@ export interface Config {
  */
 export interface User {
   id: string;
+  displayName?: string | null;
+  role: 'admin' | 'tailor' | 'partner' | 'customer';
+  boundTailor?: (string | null) | Tailor;
   updatedAt: string;
   createdAt: string;
+  enableAPIKey?: boolean | null;
+  apiKey?: string | null;
+  apiKeyIndex?: string | null;
   email: string;
   resetPasswordToken?: string | null;
   resetPasswordExpiration?: string | null;
@@ -39,26 +48,198 @@ export interface User {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "pages".
+ * via the `definition` "tailors".
  */
-export interface Page {
+export interface Tailor {
   id: string;
-  title?: string | null;
-  content?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
+  isActive?: boolean | null;
+  businessName: string;
+  contactPerson?: string | null;
+  phoneNumber: number;
+  email?: string | null;
+  address: {
+    street: string;
+    apt?: string | null;
+    city: string;
+    state:
+      | 'AL'
+      | 'AK'
+      | 'AZ'
+      | 'AR'
+      | 'CA'
+      | 'CO'
+      | 'CT'
+      | 'DE'
+      | 'FL'
+      | 'GA'
+      | 'HI'
+      | 'ID'
+      | 'IL'
+      | 'IN'
+      | 'IA'
+      | 'KS'
+      | 'KY'
+      | 'LA'
+      | 'ME'
+      | 'MD'
+      | 'MA'
+      | 'MI'
+      | 'MN'
+      | 'MS'
+      | 'MO'
+      | 'MT'
+      | 'NE'
+      | 'NV'
+      | 'NH'
+      | 'NJ'
+      | 'NM'
+      | 'NY'
+      | 'NC'
+      | 'ND'
+      | 'OH'
+      | 'OK'
+      | 'OR'
+      | 'PA'
+      | 'RI'
+      | 'SC'
+      | 'SD'
+      | 'TN'
+      | 'TX'
+      | 'UT'
+      | 'VT'
+      | 'VA'
+      | 'WA'
+      | 'WV'
+      | 'WI'
+      | 'WY';
+    zip: number;
+  };
+  website?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "orders".
+ */
+export interface Order {
+  id: string;
+  status: 'pending' | 'inProgress' | 'completed' | 'cancelled';
+  orderedBy?: (string | null) | User;
+  tailoredBy?: (string | null) | Tailor;
+  charge?: number | null;
+  tailorFee?: number | null;
+  invoiceStatus?: ('notCreated' | 'created' | 'sent' | 'paid') | null;
+  items?:
+    | {
+        item: {
+          itemName: string;
+          itemCategory?: (string | null) | ItemCategory;
+        };
+        services?:
+          | {
+              service?: (string | null) | ServiceOption;
+              serviceDetail?: {
+                serviceLocation?: string | null;
+                description?: string | null;
+              };
+              id?: string | null;
+            }[]
+          | null;
+        attachedMessage?: string | null;
+        attachedImages?:
+          | {
+              image?: string | Media | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  contactPerson?: string | null;
+  phoneNumber?: number | null;
+  email?: string | null;
+  address: {
+    street: string;
+    apt?: string | null;
+    city: string;
+    state:
+      | 'AL'
+      | 'AK'
+      | 'AZ'
+      | 'AR'
+      | 'CA'
+      | 'CO'
+      | 'CT'
+      | 'DE'
+      | 'FL'
+      | 'GA'
+      | 'HI'
+      | 'ID'
+      | 'IL'
+      | 'IN'
+      | 'IA'
+      | 'KS'
+      | 'KY'
+      | 'LA'
+      | 'ME'
+      | 'MD'
+      | 'MA'
+      | 'MI'
+      | 'MN'
+      | 'MS'
+      | 'MO'
+      | 'MT'
+      | 'NE'
+      | 'NV'
+      | 'NH'
+      | 'NJ'
+      | 'NM'
+      | 'NY'
+      | 'NC'
+      | 'ND'
+      | 'OH'
+      | 'OK'
+      | 'OR'
+      | 'PA'
+      | 'RI'
+      | 'SC'
+      | 'SD'
+      | 'TN'
+      | 'TX'
+      | 'UT'
+      | 'VT'
+      | 'VA'
+      | 'WA'
+      | 'WV'
+      | 'WI'
+      | 'WY';
+    zip: number;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "itemCategories".
+ */
+export interface ItemCategory {
+  id: string;
+  name: string;
+  availableServices: (string | ServiceOption)[];
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "serviceOptions".
+ */
+export interface ServiceOption {
+  id: string;
+  name: string;
+  serviceType: 'alteration' | 'repair';
+  description: string;
+  price: number;
   updatedAt: string;
   createdAt: string;
 }
@@ -68,7 +249,7 @@ export interface Page {
  */
 export interface Media {
   id: string;
-  text?: string | null;
+  alt?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
