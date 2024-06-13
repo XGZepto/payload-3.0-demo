@@ -9,6 +9,9 @@ interface SMS {
   
 
 export default async function sendSMS(sms: SMS): Promise<void> {
+  
+  console.log('Sending SMS:', sms)
+  
   return twilioClient.messages.create({
     body: sms.text,
     to: sms.receiver,
