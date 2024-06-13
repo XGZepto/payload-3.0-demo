@@ -7,7 +7,8 @@ const Page = () => {
   return (
     <>
       <main>
-        <article>
+        Cimu Testing Page
+        {/* <article>
           <Badge />
           <h1>Payload 3.0</h1>
           <p>
@@ -42,7 +43,7 @@ return <Posts data={data} />
 `}
             </code>
           </pre>
-        </div>
+        </div> */}
       </main>
       <Background />
     </>
