@@ -1,0 +1,62 @@
+@import "../../_css/type.scss";
+@import "../../_css/queries.scss";
+
+.button {
+  border: 2px var(--color-primary) solid;
+  cursor: pointer;
+  display: inline-flex;
+  justify-content: center;
+  background-color: transparent;
+  text-decoration: none;
+  display: inline-flex;
+  padding: 12px;
+  max-width: 400px;
+  width: 100%;
+  border-radius: 100px;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.label {
+  @extend %label;
+  font-size: medium;
+  font-weight: 500;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  color: var(--color-white);
+}
+
+.appearance {
+  background-color: var(--use-bg-color);
+  color: var(--use-text-color);
+}
+
+.appearance:hover {
+  background-color: var(--color-primary);
+}
+
+.appearance--disable {
+  background-color: transparent;
+  box-shadow: inset 0 0 0 1px var(--theme-cimu-200);
+}
+
+.appearance--default {
+  padding: 0;
+  color: var(--theme-text);
+}
+
+.appearance--primary {
+  // TODO: change color to green
+  --use-bg-color: var(--color-active);
+  --use-text-color: var(--theme-elevation-0);
+}
+
+.appearance--danger {
+  --use-bg-color: var(--color-error-500);
+  --use-text-color: var(--theme-elevation-0);
+}

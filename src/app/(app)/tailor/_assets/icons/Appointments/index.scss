@@ -1,0 +1,9 @@
+@use "../../../_css/colors.scss" as *;
+
+.icon-active {
+  color: var(--color-active);
+}
+
+.icon {
+  color: var(--color-secondary);
+}

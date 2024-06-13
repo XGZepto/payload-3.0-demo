@@ -1,0 +1,22 @@
+@use "_css/queries.scss" as *;
+
+// desktop
+.gridWrapper {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+}
+
+.pageWrapper {
+  background-color: var(--color-home-bg);
+  flex: 1 1 0%;
+  overflow: auto;
+}
+
+// mobile
+@include small-break {
+  .gridWrapper {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+}

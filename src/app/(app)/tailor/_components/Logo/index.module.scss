@@ -1,0 +1,12 @@
+@use "../../../app/_css/queries.scss" as *;
+
+.logoWrapper {
+  display:flex;
+  justify-content: center;
+  opacity: 0;
+
+  img {
+    height: 106.48px;
+    width: 240px;
+  }
+}

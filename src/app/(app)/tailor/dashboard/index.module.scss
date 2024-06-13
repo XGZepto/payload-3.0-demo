@@ -1,0 +1,107 @@
+@use "../_css/queries.scss" as *;
+@use "../_css/type.scss" as *;
+@use "../global.scss" as *;
+
+.dashboard {
+  margin:0;
+  padding:0;
+  margin-bottom: var(--block-padding);
+
+  .highlight {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .section {
+    padding-top: calc(var(--base)/2);
+  }
+}
+
+.params {
+  margin-top: var(--base);
+}
+
+.availableOrders {
+  .availableOrdersCard {
+    display: flex;
+    flex-direction: row;
+    gap: var(--base);
+
+    .availableOrdersCardImage {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background-color: var(--color-gray-300);
+    }
+
+    .availableOrdersCardContent {
+      flex: 1 1 0%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .header {
+        @extend %h5;
+        margin: 0;
+      }
+
+      .timeLimit {
+        @extend %h6;
+        margin: 0;
+      }
+    }
+  }
+}
+
+.seeAll {
+  display: flex;
+  flex-direction: row;
+  .text {
+    @extend %h6;
+    margin: 0;
+    flex: 1 1 0%;
+  }
+
+  .arrow {
+    @extend %h6;
+    margin: 0;
+  }
+}
+
+.accepted,
+.pending,
+.recentPastOrders {
+  .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .seeMore {
+      @extend %h6;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+
+  .listHolder {
+    display: flex;
+    flex-direction: column;
+    gap: var(--base) / 2;
+  }
+  .card {
+    display: flex;
+    flex-direction: row;
+    .text {
+      flex: 1 1 0%;
+      @extend %h6;
+      margin: 0;
+    }
+    .label {
+      @extend %h6;
+      margin: 0;
+    }
+  }
+}
